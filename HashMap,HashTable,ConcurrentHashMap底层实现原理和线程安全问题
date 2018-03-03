@@ -1,0 +1,9 @@
+1.	HashMap
+2.	Hashtable
+3.	Conuurent
+4.	HashMap和Hashtable的区别。
+（1）	HashMap产生散列冲突时采用的时线性探测法，而Hashtable采用的是链表，即相同hash值的Entry值组成链表。
+（2）	HashMap可以接受值为null的key和value，但是Hashtable不可以。
+（3）	HashMap不是Synchronized,而Hashtable是，它大部分提供给外部的接口方法都是Synchronized.所以Hastable是线程安全的，而HashMap不是。
+（4）	HashMap的迭代器是fail-fast的，就是说如果有一个HashMap对象创建了itrator,那么，如果其他对象试图从结构上更改这个对象，也就是增加或删除一个元素，就会报异常，而Hashtable的迭代器是enumerator迭代器，是可以改变的。
+
