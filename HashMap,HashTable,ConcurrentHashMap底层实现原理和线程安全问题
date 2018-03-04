@@ -1,8 +1,11 @@
 1.	HashMap
+HashMap是继承了Abstract<K,V>类，实现了Map<K,V>接口,Cloneable接口，Serializable接口的一个类，而Abstract<K,V>类是实现了Map<K,V>接口的抽象类，定义了一个抽象方法entrySet()，返回一个泛型为Entry的Set集合，定义了一个SimpleImmutableEntry<K,V>内部类，这个类实现了Map<K,V>接口中的Entry<K,V>接口，就是一个键值对类，包括get，set等方法。HashMap中定义了一个内部类，Node<K,V>，实现了Map.Entry<K,V>接口，作为键值对类。HashMap是允许key和value为null值。它虽然不是线程安全的，但是它的基础操作get，和put的时间是恒定的，在不需要考虑线程安全的情况下，它的效率会比Hashtable高。
 2.	Hashtable
-3.	Conuurent
+Hashtable和HashMap是两个很类似得类，除了Hashtable是Synchronized的，以及不允许空值。但是现在已经被淘汰了，因为由于每次操作都要给整个Hashtable加锁的缘故，可能会导致线程阻塞，执行效率较低。
+3.	ConcuurentHashMap
+ConcurrentHashMap是线程安全的HashMap的实现，它是利用了分段原理，把map分成了若干个段（ssize，由构造函数中的concurrencyLevel,参数决定），给每个段加锁而不是给整个map加锁，所以每个段就类似与一个Hashtable，然后每个段都有一个table，table的容量由总capacity除以ssize决定，capacity是输入是构造函数的参数，插入值时首先要找出对应的段，然后再找出段中对应的table中的位置，再插入,get时同理。
 4.	HashMap和Hashtable的区别。
-（1）	HashMap产生散列冲突时采用的时线性探测法，而Hashtable采用的是链表，即相同hash值的Entry值组成链表。
+（1）	HashMap和Hashtable产生散列冲突时采用的都是链表，即相同hash值的Entry值组成链表。
 （2）	HashMap可以接受值为null的key和value，但是Hashtable不可以。
 （3）	HashMap不是Synchronized,而Hashtable是，它大部分提供给外部的接口方法都是Synchronized.所以Hastable是线程安全的，而HashMap不是。
 （4）	HashMap的迭代器是fail-fast的，就是说如果有一个HashMap对象创建了itrator,那么，如果其他对象试图从结构上更改这个对象，也就是增加或删除一个元素，就会报异常，而Hashtable的迭代器是enumerator迭代器，是可以改变的。
