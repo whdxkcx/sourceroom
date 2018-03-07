@@ -1,0 +1,13 @@
+1.	HDFS体系结构
+Hdfs采用了主/从（Master/Slave）结构模型，由一个Namenode和若干个DataNode组成。
+其中Namenode负责管理文件系统的命名空间和客户端对文件的访问操作。
+Datanode管理存储的数据。
+从内部看，文件被分成了若干个数据块，这些数据块存储在一组Datanode上。
+Namenode是所有数据块元数据的管理者，但是数据存储不会经过Namenode而是直接流向Datanode。
+2.	MapReduce的体系结构
+MapReduce框架是一个单独运行在主节点的JobTracker和运行在每个集群节点的TaskTracker共同组成的。
+主节点负责调度构成一个作业的所有任务，这些任务分布在不同的集群节点上。
+主节点监控它们的情况，并重新执行之前执行失败的任务。
+从节点仅负责主节点分配的任务。
+当一个Job被提交的时候，JobTracker接受到提交的作业和配置信息以后，就会将配置信息等分配给从节点，同时调度任务，并监控TaskTracker的执行。
+
