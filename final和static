@@ -1,0 +1,7 @@
+1.	final类，就是表示当前类不能被继承，final方法不能够被重写。
+2.	static内部类和非static内部类
+static类只能是内部类，static内部类能够只能访问外部类的static方法和static域，而非static内部类可以访问外部类的所有的方法和域。Static内部类的实例化不需要先实例化外部类，而非static内部类的实例化，必须先实例化一个外部类对象。
+3.	static方法和非static方法
+staic修饰的方法会先一步被加载到方法区，以便共享使用。Static方法中不能使用this和super，因为static方法在创建对象之前就创建了，而this，和super是针对对象的。非static方法是可以使用this和super的。Static方法只加载一次，而非static方法，有多少对象，它就拷贝多少次。因为static方法只有一个，所以调用static方法时要考虑线程安全的问题。同一个类中的static方法只能访问staic的域。
+4.	static域和非static域
+static变量在加载的时候先于main方法加载在内存中的方法区，而非static变量，是要创建变量才加载到堆内存中的。Static变量是单独划分一块空间，不与对象绑定。Static变量只加载一次，而非stati变量会加载很多次。
